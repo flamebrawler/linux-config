@@ -1,3 +1,4 @@
+
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
@@ -20,4 +21,9 @@ PS1_text=$(echo $PS1_text | sed -e 's/\(\\e[^\\]*m\)/\\[\1\\]/g')
 
 PS1="${debian_chroot:+($debian_chroot)}$PS1_text "
 unset PS1_text
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+	        exec tmux
+fi
+
 
