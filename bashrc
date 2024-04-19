@@ -6,9 +6,6 @@ rgb (){
 	echo "\033[38;2;$1;$2;$3m"
 }
 
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 green="\e[01;32m"
 yellow="\e[00;33m"
 purple="\e[01;35m"
