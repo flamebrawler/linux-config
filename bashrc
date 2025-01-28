@@ -20,7 +20,7 @@ PS1="${debian_chroot:+($debian_chroot)}$PS1_text "
 unset PS1_text
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	        exec tmux
+#	        exec tmux
 fi
 
 
