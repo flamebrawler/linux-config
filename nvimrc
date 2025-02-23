@@ -81,8 +81,8 @@ nmap cn <Plug>(conflict-marker-none)
 nmap cb <Plug>(conflict-marker-both)
 nmap cB <Plug>(conflict-marker-both-rev)
 
-let g:coq_settings = { 'auto_start': v:true }
-let g:coq_settings = { 'auto_start': 'shut-up' }
+" let g:coq_settings = { 'auto_start': v:true }
+" let g:coq_settings = { 'auto_start': 'shut-up' }
 
 
 nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
