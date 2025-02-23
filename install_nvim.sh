@@ -16,23 +16,6 @@ sudo apt install gcc -y
 sudo apt install --yes -- python3-venv
 sudo apt-get install ripgrep
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Cousine.zip
-mkdir Cousine
-unzip Cousine.zip -d Cousine
-mkdir ~/.fonts
-cp Cousine/*.ttf ~/.fonts
-fc-cache -fv
-rm -rf Cousine
-rm Cousine.zip
-
-#tmux tpm
-sudo apt install tmux -y 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-sudo chsh -s $(which zsh)
 
 echo "call :PlugInstall"
 echo "call :COQdeps"
-echo "tmux :source ~/.tmux.conf"
-echo "press Ctrl-a + I (capital)"
-echo "Change the font of the terminal"
