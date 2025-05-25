@@ -1,90 +1,123 @@
 set number
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 set smartcase
 set ignorecase
 set hlsearch
 
 call plug#begin()
 
-Plug 'sheerun/vim-polyglot'
-Plug 'ayu-theme/ayu-vim' " or other package manager
-Plug 'rebelot/kanagawa.nvim'
-Plug 'sainnhe/sonokai'
-Plug 'morhetz/gruvbox'
-Plug 'kyazdani42/nvim-web-devicons'
-
-" statusline
-Plug 'nvim-lualine/lualine.nvim'
-"tabline
-Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
-Plug 'romgrk/barbar.nvim'
-" Plug 'rhysd/conflict-marker.vim'
-Plug 'akinsho/git-conflict.nvim'
-
-" quickfix
-Plug 'yorickpeterse/nvim-pqf'
-Plug 'romainl/vim-qf'
-
-Plug 'echasnovski/mini.nvim'
-Plug 'numToStr/Comment.nvim'
-Plug 'stevearc/oil.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" filesearch/grep
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-"autocomplete
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'sudormrfbin/cheatsheet.nvim'
-Plug 'famiu/bufdelete.nvim'
-Plug 'nosduco/remote-sshfs.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-" Plug 'preservim/tagbar'
-"
-" motions
-Plug 'hadronized/hop.nvim'
-Plug 'ggandor/leap.nvim'
-
-" textobjects
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'kylechui/nvim-surround'
-Plug 'brenoprata10/nvim-highlight-colors'
-Plug 'azabiong/vim-highlighter'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim'
-
-Plug 'rcarriga/nvim-notify'
-Plug 'chentoast/marks.nvim'
-
 function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
     let &rtp=&rtp
     UpdateRemotePlugins
 endfunction
+
+" Style
+Plug 'ayu-theme/ayu-vim' " or other package manager
+Plug 'rebelot/kanagawa.nvim'
+Plug 'sainnhe/sonokai'
+Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim'
+Plug 'navarasu/onedark.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'romgrk/barbar.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'rcarriga/nvim-notify'
+Plug 'akinsho/bufferline.nvim'
+
+
+"keybinds
+Plug 'kylechui/nvim-surround'
+Plug 'famiu/bufdelete.nvim'
+Plug 'numToStr/Comment.nvim'
+Plug 'azabiong/vim-highlighter'
+" text object
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" motions
+Plug 'hadronized/hop.nvim'
+Plug 'ggandor/leap.nvim'
+
+" clarity
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'chentoast/marks.nvim'
+Plug 'sheerun/vim-polyglot'
+Plug 'folke/twilight.nvim'
+
+
+Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
+Plug 'akinsho/git-conflict.nvim'
+
+" quickfix
+" Plug 'yorickpeterse/nvim-pqf'
+" Plug 'romainl/vim-qf'
+Plug 'kevinhwang91/nvim-bqf'
+
+" separate tools
+Plug 'stevearc/oil.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+" Plug 'nvim-tree/nvim-tree.lua'
+Plug 'stevearc/aerial.nvim'
+"autocomplete
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
+Plug 'echasnovski/mini.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+" filesearch/grep
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'nosduco/remote-sshfs.nvim'
+" Plug 'preservim/tagbar'
+
+Plug 'brenoprata10/nvim-highlight-colors'
+Plug 'goolord/alpha-nvim'
+Plug 'rmagatti/auto-session'
+Plug 'UtkarshVerma/molokai.nvim'
+
+
 Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+Plug 'nvim-pack/nvim-spectre'
+" Plug 'folke/trouble.nvim'
+" Plug 'L3MON4D3/LuaSnip'
+
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
-vnoremap p "_dP
+" vnoremap p "_dP
+let g:onedark_config = {
+    \ 'style': 'darker',
+\}
+
+
 
 set termguicolors     " enable true colors support
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
 " colorscheme ayu
-colorscheme kanagawa
+" kanagawa
+" colorscheme kanagawa-wave
+colorscheme tokyonight-night
+" colorscheme onedark
 
 " nmap <leader>t :TagbarToggle<CR>
 
-
+" nnoremap <C-p> :FuzzyOpen<CR>
 map <silent><esc> :noh <CR>
 map <silent><C-c> :noh <CR>
 nnoremap <C-s> <C-a>
+"
+" Find files using Telescope command-line sugar.
+nnoremap <silent>    [b <Cmd>BufferLinePrevious<CR>
+nnoremap <silent>    ]b <Cmd>BufferLineNext<CR>
 
 nnoremap <leader>ff :lua require('telescope.builtin').find_files({ no_ignore = true })<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -96,76 +129,77 @@ nnoremap <leader>fr <cmd>Telescope registers<cr>
 nnoremap <leader>ft <cmd>Telescope treesitter<cr>
 
 nnoremap <leader>d :Bd<cr>
+nnoremap <leader>t :Twilight<cr>
+nnoremap <leader>gl :Gitsigns blame_line<cr>
+nnoremap <leader>gg :Gitsigns blame<cr>
+command! MarksQFListAllCustom exe "lua require'marks'.mark_state:all_to_list('quickfixlist')" | botright copen
+nnoremap <leader>m :MarksQFListAllCustom<cr>
+
+nnoremap <silent> <c-p> :BufferLinePick<CR>
+nnoremap <silent><a-,> :BufferLineCyclePrev<CR>
+nnoremap <silent><a-.> :BufferLineCycleNext<CR>
+nnoremap <silent><a->> :BufferLineMoveNext<CR>
+nnoremap <silent><a-<> :BufferLineMovePrev<CR>
+nnoremap <silent><C-l> <c-6>
+
+nmap <leader>q :cclose<CR>
 
 
-let g:qf_mapping_ack_style = 1
-nmap <leader>q <Plug>(qf_qf_toggle)
+" let g:conflict_marker_enable_mappings = 0
+" nmap ]c <Plug>(conflict-marker-next-hunk)
+" nmap [c <Plug>(conflict-marker-prev-hunk)
+" nmap ct <Plug>(conflict-marker-themselves)
+" nmap co <Plug>(conflict-marker-ourselves)
+" nmap cn <Plug>(conflict-marker-none)
+" nmap cb <Plug>(conflict-marker-both)
+" nmap cB <Plug>(conflict-marker-both-rev)
 
-
-"let g:coq_settings = { 'auto_start': v:true }
-"let g:coq_settings = { 'auto_start': 'shut-up' }
+let g:coq_settings = { 'auto_start': v:true }
+let g:coq_settings = { 'auto_start': 'shut-up' }
 " nmap <silent><space> :HopChar2MW<CR>
 
 
-nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
-" :match
-
 " tabline bindings
-nnoremap <silent>    <A-,> <Cmd>BufferPrevious<CR>
-nnoremap <silent>    <A-.> <Cmd>BufferNext<CR>
+" nnoremap <silent>    <A-,> <Cmd>BufferPrevious<CR>
+" nnoremap <silent>    <A-.> <Cmd>BufferNext<CR>
 
 " Re-order to previous/next
-nnoremap <silent>    <A-<> <Cmd>BufferMovePrevious<CR>
-nnoremap <silent>    <A->> <Cmd>BufferMoveNext<CR>
+" nnoremap <silent>    <A-<> <Cmd>BufferMovePrevious<CR>
+" nnoremap <silent>    <A->> <Cmd>BufferMoveNext<CR>
 
 " Goto buffer in position...
-nnoremap <silent>    <A-1> <Cmd>BufferGoto 1<CR>
-nnoremap <silent>    <A-2> <Cmd>BufferGoto 2<CR>
-nnoremap <silent>    <A-3> <Cmd>BufferGoto 3<CR>
-nnoremap <silent>    <A-4> <Cmd>BufferGoto 4<CR>
-nnoremap <silent>    <A-5> <Cmd>BufferGoto 5<CR>
-nnoremap <silent>    <A-6> <Cmd>BufferGoto 6<CR>
-nnoremap <silent>    <A-7> <Cmd>BufferGoto 7<CR>
-nnoremap <silent>    <A-8> <Cmd>BufferGoto 8<CR>
-nnoremap <silent>    <A-9> <Cmd>BufferGoto 9<CR>
-nnoremap <silent>    <A-0> <Cmd>BufferLast<CR>
-
+" nnoremap <silent>    <A-1> <Cmd>BufferGoto 1<CR>
+" nnoremap <silent>    <A-2> <Cmd>BufferGoto 2<CR>
+" nnoremap <silent>    <A-3> <Cmd>BufferGoto 3<CR>
+" nnoremap <silent>    <A-4> <Cmd>BufferGoto 4<CR>
+" nnoremap <silent>    <A-5> <Cmd>BufferGoto 5<CR>
+" nnoremap <silent>    <A-6> <Cmd>BufferGoto 6<CR>
+" nnoremap <silent>    <A-7> <Cmd>BufferGoto 7<CR>
+" nnoremap <silent>    <A-8> <Cmd>BufferGoto 8<CR>
+" nnoremap <silent>    <A-9> <Cmd>BufferGoto 9<CR>
+" nnoremap <silent>    <A-0> <Cmd>BufferLast<CR>
+"
 " Pin/unpin buffer
-nnoremap <silent>    <A-p> <Cmd>BufferPin<CR>
-
-" Goto pinned/unpinned buffer
-"                          :BufferGotoPinned
-"                          :BufferGotoUnpinned
+" nnoremap <silent>    <A-p> <Cmd>BufferPin<CR>
 
 " Close buffer
-nnoremap <silent>    <A-c> <Cmd>BufferClose<CR>
-nnoremap <silent>    <leader>d <Cmd>BufferClose<CR>
+" nnoremap <silent>    <A-c> <Cmd>BufferClose<CR>
+" nnoremap <silent>    <leader>d <Cmd>BufferClose<CR>
 " Restore buffer
-nnoremap <silent>    <A-s-c> <Cmd>BufferRestore<CR>
-
-" Wipeout buffer
-"                          :BufferWipeout
-" Close commands
-"                          :BufferCloseAllButCurrent
-"                          :BufferCloseAllButVisible
-"                          :BufferCloseAllButPinned
-"                          :BufferCloseAllButCurrentOrPinned
-"                          :BufferCloseBuffersLeft
-"                          :BufferCloseBuffersRight
+" nnoremap <silent>    <A-s-c> <Cmd>BufferRestore<CR>
 
 " Magic buffer-picking mode
-nnoremap <silent> <C-p> <Cmd>BufferPick<CR>
-nnoremap <silent> <C-s-p> <Cmd>BufferPickDelete<CR>
+" nnoremap <silent> <C-p> <Cmd>BufferPick<CR>
+" nnoremap <silent> <C-s-p> <Cmd>BufferPickDelete<CR>
 
 " Sort automatically by...
-nnoremap <silent> <Space>bb <Cmd>BufferOrderByBufferNumber<CR>
-nnoremap <silent> <Space>bn <Cmd>BufferOrderByName<CR>
-nnoremap <silent> <Space>bd <Cmd>BufferOrderByDirectory<CR>
-nnoremap <silent> <Space>bl <Cmd>BufferOrderByLanguage<CR>
-nnoremap <silent> <Space>bw <Cmd>BufferOrderByWindowNumber<CR>
+" nnoremap <silent> <Space>bb <Cmd>BufferOrderByBufferNumber<CR>
+" nnoremap <silent> <Space>bn <Cmd>BufferOrderByName<CR>
+" nnoremap <silent> <Space>bd <Cmd>BufferOrderByDirectory<CR>
+" nnoremap <silent> <Space>bl <Cmd>BufferOrderByLanguage<CR>
+" nnoremap <silent> <Space>bw <Cmd>BufferOrderByWindowNumber<CR>
+autocmd bufenter * if (winnr("$") == 1 && &filetype == "neo-tree") | q | endif
 
-
-autocmd VimEnter * execute("Neotree show")
 
 lua << END
 
@@ -203,21 +237,22 @@ wilder.setup({
 --vim.keymap.set('c', '<tab>', wilder.in_context() ? wilder.next() : '<tab>')
 wilder.set_option('pipeline', {
   wilder.branch(
+    -- can use python instead of vim if available
     wilder.cmdline_pipeline({
       -- sets the language to use, 'vim' and 'python' are supported
-      language = 'python',
+      language = 'vim',
       -- 0 turns off fuzzy matching
       -- 1 turns on fuzzy matching
       -- 2 partial fuzzy matching (match does not have to begin with the same first letter)
       fuzzy = 1,
     }),
-    wilder.python_search_pipeline({
-      -- can be set to wilder#python_fuzzy_delimiter_pattern() for stricter fuzzy matching
-      pattern = wilder.python_fuzzy_pattern(),
+    wilder.vim_search_pipeline({
+      -- can be set to wilder#vim_fuzzy_delimiter_pattern() for stricter fuzzy matching
+      -- pattern = wilder.vim_fuzzy_pattern(),
       -- omit to get results in the order they appear in the buffer
-      sorter = wilder.python_difflib_sorter(),
+      -- sorter = wilder.vim_difflib_sorter(),
       -- can be set to 're2' for performance, requires pyre2 to be installed
-      -- see :h wilder#python_search() for more details
+      -- see :h wilder#vim_search() for more details
       engine = 're',
     })
   ),
@@ -241,6 +276,7 @@ require("ibl").setup()
 require('oil').setup()
 require('Comment').setup()
 require('mini.ai').setup()
+require('mini.operators').setup()
 -- require('mini.surround').setup()
 require("nvim-surround").setup()
 require("notify")
@@ -287,9 +323,9 @@ require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
     -- config_key = value,
-    -- vimgrep_arguments = {
-    --     'rg', '--ignore', '--hidden', '--no-ignore-vcs', '--vimgrep', '-g', '*.{c,h,py,cxx,hxx,txt,md,json}'
-    -- },
+    vimgrep_arguments = {
+        'rg', '--ignore', '--hidden', '--no-ignore-vcs', '--vimgrep'--[[ , '-g', '*.{c,h,py,cxx,hxx,txt,md,json}' ]]
+    },
     mappings = {
       i = {
         ["<C-c>"] = false,
@@ -331,6 +367,7 @@ require('lualine').setup{
         theme  = 'auto',
     },
   sections = {
+      lualine_b = {'branch', 'diff', 'diagnostics'},
       lualine_c = {
           {
           'filename',
@@ -356,6 +393,8 @@ require'nvim-treesitter.configs'.setup {
         ["an"] = "@block.outer",
         ["in"] = "@block.inner",
         ["ac"] = "@class.outer",
+        ["il"] = "@call.inner",
+        ["al"] = "@call.outer",
         -- You can optionally set descriptions to the mappings (used in the desc parameter of
         -- nvim_buf_set_keymap) which plugins like which-key display
         ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
@@ -387,8 +426,9 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-require('pqf').setup()
-vim.opt.termguicolors = true
+-- require('pqf').setup()
+require('bqf').setup()
+-- vim.opt.termguicolors = true
 
 require('nvim-highlight-colors').setup({})
 require('marks').setup()
@@ -400,11 +440,98 @@ require("neo-tree").setup({
                 ["/"] = "noop"
             }
         }
-    },
-    source_selector = {
-        winbar = true,
-        statusline = false
     }
 })
+require("twilight").setup({
+    dimming = {
+        inactive = true,
+    },
+    context = 15,
+})
+require('gitsigns').setup()
+require("aerial").setup({
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+vim.keymap.set("n", "<leader>n", "<cmd>Neotree show toggle<CR>")
+require("bufferline").setup{
+    options = {
+        separator_style = "slant",
+        offsets = {
+            filetype = "neo-tree filesystem",
+            text = "File explorer",
+            text_align = "left" ,
+            separator = true
+        }
+    }
+}
+local groups = require('bufferline.groups')
+groups = {
+    options = {
+      toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+    },
+    items = {
+      {
+        name = "Tests", -- Mandatory
+        highlight = {underline = true, sp = "blue"}, -- Optional
+        priority = 2, -- determines where it will appear relative to other groups (Optional)
+        icon = " ", -- Optional
+        matcher = function(buf) -- Mandatory
+          return buf.filename:match('%test%')
+        end,
+      },
+      {
+        name = "Docs",
+        highlight = {undercurl = true, sp = "green"},
+        auto_close = false,  -- whether or not close this group if it doesn't contain the current buffer
+        matcher = function(buf)
+          return buf.filename:match('%.md') or buf.filename:match('%.txt')
+        end,
+        separator = { -- Optional
+          style = require('bufferline.groups').separator.tab
+        },
+      }
+    }
+}
+-- require("nvim-tree").setup()
+-- require('dashboard').setup{}
+local startify = require("alpha.themes.startify")
+-- available: devicons, mini, default is mini
+-- if provider not loaded and enabled is true, it will try to use another provider
+startify.file_icons.provider = "devicons"
+require("alpha").setup(
+    startify.config
+)
+require("auto-session").setup()
+-- vim.cmd [[autocmd VimEnter * ]]
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    --   vim.schedule(function()
+    -- end)
+      -- vim.cmd [[execute("Neotree show")]]
+  end
+})
+
+require('spectre').setup()
+vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre"
+})
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "Search on current file"
+})
+require("nvim-autopairs").setup {}
+
 END
 
