@@ -19,7 +19,9 @@ sudo apt update -y
 sudo apt install gcc -y
 sudo apt install --yes -- python3-venv
 sudo apt-get install ripgrep
-
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+cargo install tree-sitter-cli
 
 # echo "call :PlugInstall"
 # echo "call :COQdeps"
