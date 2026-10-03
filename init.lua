@@ -7,6 +7,10 @@ vim.opt.smartcase     = true
 vim.opt.ignorecase    = true
 vim.opt.hlsearch      = true
 vim.opt.termguicolors = true
+vim.opt.laststatus    = 3
+vim.opt.showtabline   = 2
+vim.opt.winbar        = '%f'
+
 
 -- ============================================================
 -- KEYMAPS (non-plugin)
@@ -98,10 +102,11 @@ require('lazy').setup({
         options = {
           separator_style = 'slant',
           offsets = {{
-            filetype   = 'neo-tree filesystem',
+            filetype   = 'neo-tree',
             text       = 'File explorer',
             text_align = 'left',
             separator  = true,
+            padding    = 1,
           }},
         },
       }
@@ -141,12 +146,12 @@ require('lazy').setup({
   -- ----------------------------------------------------------
   -- Motions
   -- ----------------------------------------------------------
-  { 'hadronized/hop.nvim',
-    config = function()
-      require('hop').setup()
-    end,
-  },
-  { 
+--  { 'hadronized/hop.nvim',
+--    config = function()
+--      require('hop').setup()
+--    end,
+--  },
+  {
     url= 'https://codeberg.org/andyg/leap.nvim',
     config = function()
       require('leap').setup{}
@@ -284,44 +289,56 @@ require('lazy').setup({
   -- Treesitter
   -- ----------------------------------------------------------
   { 'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     lazy = false,
-    tag = "v0.10.0",
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter').setup{
-        ensure_installed = {
-          'c','cpp','python','lua','rust','vim','vimdoc','bash','markdown','markdown_inline'
-        },
-        highlight = { enable = true },
-        textobjects = {
-          select = {
-            enable    = true,
-            lookahead = true,
-            keymaps = {
-              ['ad'] = '@function.outer',
-              ['id'] = '@function.inner',
-              ['an'] = '@block.outer',
-              ['in'] = '@block.inner',
-              ['ac'] = '@class.outer',
-              ['il'] = '@call.inner',
-              ['al'] = '@call.outer',
-              ['ic'] = { query = '@class.inner',    desc = 'Select inner part of a class region' },
-              ['as'] = { query = '@local.scope',    query_group = 'locals', desc = 'Select language scope' },
-            },
-            selection_modes = {
-              ['@parameter.outer'] = 'v',
-              ['@function.outer']  = 'V',
-              ['@class.outer']     = '<c-v>',
-            },
-            include_surrounding_whitespace = false,
-          },
-        },
+      local ensure_installed = {
+        'c','cpp','python','lua','rust','vim','vimdoc','bash','markdown','markdown_inline'
       }
+      require('nvim-treesitter').setup{
+        install_dir = vim.fn.stdpath('data') .. '/site',
+      }
+      require('nvim-treesitter').install(ensure_installed)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern  = ensure_installed,
+        callback = function() vim.treesitter.start() end,
+      })
     end,
   },
   { 'nvim-treesitter/nvim-treesitter-textobjects',
-    lazy=false,
+    branch = 'main',
+    lazy   = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    init = function()
+      vim.g.no_plugin_maps = true
+    end,
+    config = function()
+      require('nvim-treesitter-textobjects').setup{
+        select = {
+          lookahead = true,
+          selection_modes = {
+            ['@parameter.outer'] = 'v',
+            ['@function.outer']  = 'V',
+            ['@class.outer']     = '<c-v>',
+          },
+          include_surrounding_whitespace = false,
+        },
+      }
+      local select = require('nvim-treesitter-textobjects.select').select_textobject
+      local map    = vim.keymap.set
+      map({ 'x', 'o' }, 'ad', function() select('@function.outer', 'textobjects') end)
+      map({ 'x', 'o' }, 'id', function() select('@function.inner', 'textobjects') end)
+      map({ 'x', 'o' }, 'an', function() select('@block.outer',    'textobjects') end)
+      map({ 'x', 'o' }, 'in', function() select('@block.inner',    'textobjects') end)
+      map({ 'x', 'o' }, 'ac', function() select('@class.outer',    'textobjects') end)
+      map({ 'x', 'o' }, 'il', function() select('@call.inner',     'textobjects') end)
+      map({ 'x', 'o' }, 'al', function() select('@call.outer',     'textobjects') end)
+      map({ 'x', 'o' }, 'ic', function() select('@class.inner',    'textobjects') end,
+        { desc = 'Select inner part of a class region' })
+      map({ 'x', 'o' }, 'as', function() select('@local.scope',    'locals') end,
+        { desc = 'Select language scope' })
+    end,
   },
   { 'nvim-treesitter/nvim-treesitter-context',
     lazy = false,
@@ -333,7 +350,7 @@ require('lazy').setup({
   -- ----------------------------------------------------------
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'nvim-telescope/telescope.nvim',
-    tag          = '0.1.8',
+    tag          = 'v0.2.2',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-live-grep-args.nvim',
@@ -560,7 +577,7 @@ require('lazy').setup({
   --   end,
   -- },
   {
-    'chipsenkbeil/distant.nvim', 
+    'chipsenkbeil/distant.nvim',
     branch = 'v0.3',
     config = function()
         require('distant'):setup()
@@ -606,3 +623,4 @@ require('lazy').setup({
   -- lazy.nvim options
   install = { colorscheme = { 'tokyonight-night' } },
 })
+
